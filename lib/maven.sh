@@ -15,12 +15,13 @@ _mvn_java_opts() {
   echo -n " -Duser.home=$home -Dmaven.repo.local=$cache/.m2/repository"
 }
 
+# CHANGE HERE TO DEFINE MAVEN CUSTOM GOALS
 _mvn_cmd_opts() {
   local scope=${1}
 
   if [ "$scope" = "compile" ]; then
     echo -n "${MAVEN_CUSTOM_OPTS:-"-DskipTests"}"
-    echo -n " ${MAVEN_CUSTOM_GOALS:-"clean dependency:list install"}"
+    echo -n " ${MAVEN_CUSTOM_GOALS:-"clean compile assembly:single"}"
   elif [ "$scope" = "test-compile" ]; then
     echo -n "${MAVEN_CUSTOM_GOALS:-"clean dependency:resolve-plugins test-compile"}"
   else
